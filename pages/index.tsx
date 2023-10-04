@@ -24,6 +24,7 @@ const questions = [
     description: "technical interview",
     difficulty: "Medium",
   },
+  
   {
     id: 3,
     name: "Technical & Behavioral",
