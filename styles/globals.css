@@ -2,9 +2,533 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #feba01;
+  --secondary-color: #3A032D;
+  --tertiary-color: #000;
+  --main-background-color: #FAF9F6;
+  --no-validation-error-color: green;
+  --validation-error-color: red;
+  --heading: 22px;
+  --sub-heading: 21px
+  --disabled-opacity: 0.6;
+  --disabled-color:rgba(76, 78, 100, 0.38);
+  --success-color: #21CD9C;
+  --error-color: #F45B5B;
+  --highlight-color: #62B4FF;
+  --unauthorized-screen-bg: #001C2D;
+
+  /* card */
+  --card-background: #f5f5f7;
+  --card-border-radius: 14px;
+  --card-radius-8px: 8px;
+  --card-radius-14px: 14px;
+  --card-radius-12px: 12px;
+  --card-radius-20px: 20px;
+
+  /* font sizes */
+  --font-36px: 36px;
+  --font-32px: 32px;
+  --font-28px: 28px;
+  --font-24px: 24px;
+  --font-20px: 20px;
+  --font-18px: 18px;
+  --font-16px: 16px;
+  --font-13px: 13px;
+  --font-10px: 10px;
+
+  /* font color */
+  --primary-text: #feba01;
+  --main-text-color:#3A032D;
+
+  /* background  */
+  --white-bg: #fff;
+  --transparent-bg: transparent;
+
+  /* Chip colors*/
+  --chip-green:#21CD9C;
+  --chip-yellow:#FEBA01;
+  --chip-red:#F45B5B;
+
+  /* action btn */
+  --action-btn-color: #f24e1e;
+
+  /* shadow  */
+  --all-side-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 
+  0px 2px 4px rgba(0, 0, 0, 0.1) inset 
+}
+
+*{
+  font-family: "Baloo Bhai 2" !important;
+}
+
+html,
+body,
+#__next,
+.scroll-smooth {
+  height: 100%;
+}
+
+* {
+  /* color: var(--main-text-color) !important; */
+  /* font-family: "Baloo Bhai 2" !important; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: var(--main-text-color) !important;
+}
+
+.primary-button {
+  background: var(--action-btn-color);
+  color: #fff !important;
+}
+.option-container {
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.option-container.active {
+  border: 2px solid var(--primary-color);
+  background: navajowhite;
+  font-weight: bolder;
+}
+.primary-btn,
+.secondary-btn {
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.primary-btn {
+  background: var(--action-btn-color);
+  color: #fff;
+  border: 2px solid var(--action-btn-color);
+}
+.secondary-btn {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--main-text-color);
+}
+.description {
+  font-size: 14px;
+}
+
 #gradient-canvas {
   --gradient-color-1: #bde1ff;
   --gradient-color-2: #6ca0f4;
   --gradient-color-3: #e2d8ee;
   --gradient-color-4: #94c8ff;
+}
+
+.area {
+  height: 100%;
+}
+
+.main-area {
+  overflow-y: scroll !important;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.sender-container,
+.receiver-container {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 50%;
+}
+
+.sender-container {
+  background-color: #d3f4ea;
+  text-align: left;
+}
+.receiver-container {
+  background-color: #f4f4f4;
+}
+
+.input-box {
+  border-radius: 5px;
+  padding: 10px;
+  border: 2px solid #3a032d;
+}
+input:focus,
+.send-message-button {
+  outline: none;
+}
+.send-message-button {
+  background: #f24e1e;
+  text-transform: uppercase;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+}
+
+.send-message-button.disabled {
+  opacity: 0.6;
+}
+
+
+
+/* ======= changed designs =======  */
+
+/* tabs */
+.MuiTabs-flexContainer{
+  overflow-x: scroll !important;
+}
+.MuiTabs-flexContainer::-webkit-scrollbar{
+  display: none;
+}
+
+.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-selected {
+  background: var(--primary-text);
+  border-radius: 24px;
+  padding: 8px 16px !important;
+  font-size: var(--font-16px) !important;
+  font-weight: 600;
+  color: var(--secondary-color) !important;
+}
+
+.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary {
+  border: 2px solid var(--primary-text) !important;
+  border-radius: 24px !important;
+  padding: 8px 16px !important;
+  font-size: var(--font-16px) !important;
+  font-weight: 600 !important;
+  color: var(--secondary-color) !important;
+}
+.MuiTabs-indicator{
+  background: transparent !important;
+}
+
+/*  ============= inputs  ================ */
+
+/* text input  */
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.Mui-disabled.MuiInputBase-formControl.css-1l2ldj5-MuiInputBase-root-MuiOutlinedInput-root{
+  border-radius: var(--card-border-radius);
+  /* color: var(--secondary-color);  */
+}
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-disabled.css-v34c8c-MuiInputBase-input-MuiOutlinedInput-input{
+  background: rgba(239, 239, 239, 0.3) !important;
+  border-radius: var(--card-border-radius);
+}
+
+.css-1l2ldj5-MuiInputBase-root-MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline{
+  border: 2px solid var(--secondary-color) !important;
+  border-radius: var(--font-18px);
+}
+
+/* input label  */
+.MuiFormLabel-root{
+  color: var(--secondary-color) !important;
+  font-weight: bold !important;
+}
+.MuiFormLabel-root.Mui-disabled{
+  color: var(--disabled-color) !important;
+}
+.css-v34c8c-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill{
+  border-radius: var(--card-radius-14px);
+  background: var(--transparent-bg);
+}
+
+.Mui-error>.MuiOutlinedInput-notchedOutline{
+  border: 2px solid var(--validation-error-color) !important;
+}
+
+
+.MuiFormLabel-root.Mui-error,.Mui-error>.MuiOutlinedInput-input{
+  color: var(--validation-error-color) !important;
+}
+
+.css-d5up4r-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline{
+  color: var(--validation-error-color) !important;
+  border: 2px solid var(--validation-error-color) !important;
+
+}
+
+.MuiFormControlLabel-label.Mui-disabled {
+  color: rgba(76, 78, 100, 0.38)!important;
+}
+/* Required */
+.Mui-disabled>.MuiFormLabel-asterisk {
+  color:rgba(76, 78, 100, 0.38)!important;
+}
+
+.MuiFormLabel-asterisk {
+  color: red;
+}
+
+
+/* password  */
+.Mui-disabled>.css-d5up4r-MuiInputBase-root-MuiOutlinedInput-root.MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--secondary-color) !important;
+  border-radius: var(--card-radius-14px) !important;
+}
+
+.Mui-disabled> .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(76, 78, 100, 0.22) !important;
+}
+
+.MuiOutlinedInput-notchedOutline{
+  border: 2px solid var(--secondary-color) !important;
+  border-radius: var(--card-radius-14px) !important;
+}
+
+/* typography  */
+.MuiTypography-root{
+  color: var(--secondary-color) !important;
+}
+
+/*  =============== button ============== */
+
+/* contained  */
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary{
+  background: #f24e1e;
+  text-transform: uppercase;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-size: var(--font-13px);
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 600px) {
+  .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.mobile {
+    background: #f24e1e;
+      text-transform: uppercase;
+      color: white;
+      padding: 10px 30px;
+      border-radius: 8px;
+      font-size: var(--font-13px);
+      font-weight: 700;
+    padding: 5px 10px;
+  }
+}
+
+
+
+/* outlined  */
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary, .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary{
+  border: 2px solid var(--primary-text);
+  background: var(--transparent-bg);
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+ .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary:disabled{
+  opacity: 0.6;
+
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.completed:disabled, .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.completed:disabled{
+  background: var(--success-color);
+  color: #fff;
+  border: 1px solid var(--success-color);
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.start{
+  padding: 10px 50px;
+}
+
+.MuiButton-sizeSmall{
+  padding: 4px !important;
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.completed{
+  background: var(--success-color);
+}
+
+.font-18px{
+  font-size: var(--font-18px);
+}
+
+.font-20px{
+  font-size: var(--font-18px);
+}
+
+
+
+
+/* ======progress bar =======  */
+
+.css-57hc77-MuiLinearProgress-root.MuiLinearProgress-colorSuccess {
+  background-color: #FFF0C6 !important;
+}
+
+.MuiLinearProgress-root{
+  height: 14px !important;
+  border-radius: var(--card-radius-8px);
+}
+
+.MuiLinearProgress-bar.MuiLinearProgress-barColorSuccess.MuiLinearProgress-bar1Determinate{
+  background-color: var(--primary-text) !important;
+}
+
+/* Table */
+.MuiDataGrid{
+  /* color: var(--secondary-color) !important; */
+}
+
+.MuiDataGrid-columnHeaderDraggableContainer>.MuiDataGrid-columnHeaderTitleContainer {
+  /* display: flex !important; */
+  /* justify-content: center; */
+  /* border: solid; */
+  padding: 10px !important;
+  box-sizing: border-box;
+  /* position: absolute; */
+  /* width: 189px; */
+  height: 30px;
+  /* left: 11px; */
+  /* top: 17px; */
+  border: 1.5px solid #000000;
+  border-radius: 5px;
+}
+
+.MuiDataGrid-columnHeaderDraggableContainer{
+  width: min-content !important;
+}
+.MuiDataGrid-columnHeader{
+  justify-content: center;
+}
+.MuiDataGrid-columnHeaderTitleContainer{
+  /* color: var(--secondary-color) !important; */
+}
+
+
+.MuiDataGrid-row {
+  border-bottom: solid var(--primary-color);
+}
+
+
+.MuiDataGrid-cell {
+  padding-left: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  /* color: #000; */
+  font-size: 14px !important;
+}
+.MuiDataGrid-main{
+  box-shadow: var(--all-side-shadow);
+}
+
+.MuiDataGrid-cell--withRenderer.MuiDataGrid-cell[data-field="course_name"], .MuiDataGrid-cell--withRenderer.MuiDataGrid-cell.MuiDataGrid-cell[data-field="company"], .MuiDataGrid-cell--withRenderer.MuiDataGrid-cell[data-field="designation"], .MuiDataGrid-cell--withRenderer.MuiDataGrid-cell[data-field="applied_on"],.MuiDataGrid-cell--withRenderer.MuiDataGrid-cell[data-field="actions"],.MuiDataGrid-cell--withRenderer.MuiDataGrid-cell[data-field="status"] {
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+  overflow-x: scroll !important;
+  color: var(--secondary-color);
+}
+
+/* mui modal  */
+
+.MuiDialogContent-root{
+  color: var(--secondary-color);
+}
+
+/* page  */
+
+.page-heading{
+  font-size: var(--font-24px);
+  font-weight: 700;
+}
+.page-sub-heading{
+  font-size: var(--font-20px);
+  font-weight: 700;
+}
+.page-content{
+  font-size: var(--font-16px);
+}
+.page-card{
+  padding: 20px;
+  background: var(--card-background);
+  border-radius: var(--card-border-radius);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* color: var(--secondary-color) !important; */
+}
+
+.page-card.additional-resume-card-style{
+  display: flow-root;
+  height: 768px;
+  overflow-y: scroll;
+}
+
+.page-card.card-additional-styles{
+  justify-content: center;
+    text-align: center;
+    padding: 20px 60px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px 2px 6px rgba(0, 0, 0, 0.1) inset;
+}
+
+.page-text{
+  color: var(--main-text-color) !important;
+}
+
+.content-center .page-card.card-additional-styles.new-card-style{
+  /* border: 4px solid var(--tertiary-color); */
+  box-shadow: none !important;
+  border-radius: 5px !important;
+}
+
+.content-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content-center.custom-bg{
+  background: var(--unauthorized-screen-bg) !important;
+}
+
+.primary-btn.start{
+  background: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+.primary-btn.end{
+  background: var(--error-color);
+}
+
+.interviewer-name-on-video{
+  background: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+   left: 5%;
+   color: var(--main-text-color);
+   font-weight: bold;
+}
+
+.secondary-btn.disabled .primary-btn.disabled{
+  opacity: 0.6;
+}
+
+.radio-fields label.validation-error {
+  border: 2px solid var(--validation-error-color) !important;
+  color: var(--validation-error-color) !important;
+}
+
+.MuiFormLabel-root.Mui-error,.Mui-error>.MuiOutlinedInput-input{
+  color: var(--validation-error-color) !important;
+}
+
+
+.MuiFormLabel-asterisk {
+  color: red;
+}
+
+.MuiFormHelperText-root.MuiFormHelperText-sizeMedium.MuiFormHelperText-contained{
+  color: var(--validation-error-color) !important;
 }
