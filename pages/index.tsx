@@ -5,11 +5,11 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Webcam from "react-webcam";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import Image from "next/image";
-import { getTextToSpeech } from "@/services/eleven-labs";
+import { getTextToSpeech } from "../services/eleven-labs";
 import { convertBinaryAudioToMP3 } from "../helper";
-import { questionsArr } from "@/constants/questions";
+import { questionsArr } from "../constants/questions";
 import { useSelector } from "react-redux";
-import { StoreState } from "@/redux/types";
+import { StoreState } from "../redux/types";
 
 const questions = [
   {
@@ -24,7 +24,7 @@ const questions = [
     description: "technical interview",
     difficulty: "Medium",
   },
-  
+
   {
     id: 3,
     name: "Technical & Behavioral",
@@ -100,6 +100,7 @@ export default function MockHomePage() {
   const processedFeedback = generatedFeedback.replace(/(- [^:]+:)/g, "\n$1");
   const [newQuestion, setNewQuestion] = useState("");
   const [questionCount, setQuestionCount] = useState(1);
+  const [recordedVideos, setRecordedVideos] = useState<any[]>([]);
   const totalQuestions = 5;
 
   useEffect(() => {
@@ -174,7 +175,7 @@ export default function MockHomePage() {
     };
   });
 
-  // console.log("capturing", capturing);
+  // console.log("recordedVideos", recordedVideos);
 
   const handleDownload = async () => {
     if (recordedChunks.length) {
@@ -220,7 +221,7 @@ export default function MockHomePage() {
       formData.append("file", output, `${unique_id}.mp3`);
       formData.append("model", "whisper-1");
 
-      const question = newQuestion ? newQuestion : questionsArr.behavioral;
+      const question = questionsArr.behavioral;
 
       setStatus("Transcribing");
 
@@ -253,13 +254,17 @@ export default function MockHomePage() {
         });
 
         if (results.transcript.length > 0) {
-          const prompt = `Please give feedback on the following interview question: ${question} given the following transcript: ${
-            results.transcript
-          }. You are ${
+          const prompt = `Please give feedback on the following interview question: ${
+            newQuestion ? newQuestion : question
+          } given the following transcript: ${results.transcript}. You are ${
             selectedInterviewer?.name
           }, a world-class developer and mentor, specializing in technical and behavioral interviews. Students will share the answer as response where you have to provide immediate, comprehensive, and descriptive feedback in a written summary format. The summary will break down the following areas. You are presently interviewing the student named:${
             profile?.basic_details.first_name
-          }. Address student by his/her name only.
+          }. Address student by his/her name only. Please note ${
+            profile?.basic_details.first_name
+          } is student name even if he says some other name. Refer to student as ${
+            profile?.basic_details.first_name
+          } only.
           ${`Technical Parameters
           Evaluate the relevance, accuracy, and depth of knowledge demonstrated in the student's answers.
           Soft Skill Parameters
@@ -405,7 +410,11 @@ export default function MockHomePage() {
         selectedInterviewer?.name
       }, a world-class developer and mentor, specializing in technical and behavioral interviews. Students will share the answer as response where you have to provide immediate, comprehensive, and descriptive feedback in a written summary format. You are presently interviewing the student named:${
         profile?.basic_details?.first_name
-      }. Address student by his/her name only. Generate a new question based on information provided in ${
+      }. Address student by his/her name only. Please note ${
+        profile?.basic_details.first_name
+      } is student name even if he says some other name. Refer to student as ${
+        profile?.basic_details.first_name
+      } only. Generate a new question based on information provided in ${
         profile?.basic_details?.first_name
       }${`'s`} last response: ${transcript}, type of question should be ${
         selected.name
@@ -617,7 +626,7 @@ export default function MockHomePage() {
                         </button> */}
 
                         {audioURL && audioResponse && (
-                          <audio controls>
+                          <audio controls crossOrigin="anonymous">
                             <source src={audioURL} type="audio/mp3" />
                             Your browser does not support the audio element.
                           </audio>
@@ -655,7 +664,7 @@ export default function MockHomePage() {
                               {" "}
                               {capturing || recordedChunks.length > 0
                                 ? recordedChunks.length > 0
-                                  ? "Restart"
+                                  ? "Re-attempt"
                                   : "Stop"
                                 : "Start"}{" "}
                             </span>
@@ -668,6 +677,16 @@ export default function MockHomePage() {
                           onClick={
                             generatedFeedback
                               ? () => {
+                                  const temp = [...recordedVideos];
+                                  temp.push({
+                                    id: recordedVideos.length + 1,
+                                    value: URL.createObjectURL(
+                                      new Blob(recordedChunks, {
+                                        type: "video/mp4",
+                                      })
+                                    ),
+                                  });
+                                  setRecordedVideos([...temp]);
                                   restartVideo();
                                   generateNewQuestion();
                                 }
@@ -689,7 +708,7 @@ export default function MockHomePage() {
                           {!generatedFeedback
                             ? isSubmitting
                               ? status
-                              : "Process Transcript"
+                              : "Submit"
                             : "Next Question"}
                         </button>
                       </div>
@@ -746,17 +765,17 @@ export default function MockHomePage() {
         ) : (
           <div className="flex flex-col md:flex-row w-full md:overflow-hidden">
             <div className="w-full min-h-[60vh] md:w-1/2 md:h-screen flex flex-col px-4 pt-2 pb-8 md:px-0 md:py-2 bg-[#FAF9F6] justify-center">
-              <div className="items-center justify-center flex flex-col">
+              {/* <div className="items-center justify-center flex flex-col">
                 <Image
                   width={250}
                   height={250}
                   src="/svgs/kodnest-logo.png"
                   alt="app-logo"
                 />
-              </div>
+              </div> */}
               <div className="text-right w-100">
-                <p className="text-2xl font-bold text-right mr-4">
-                  Mock Interviews {">>"}
+                <p className="text-2xl font-bold text-center mr-4">
+                  Video Preview
                 </p>
                 <Webcam
                   mirrored
